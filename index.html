@@ -5,29 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fat Rat Game</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animations.css" />
   </head>
   <body>
-    <main>
-      <section id="screen">
-        <div id="game">
-          <div id="game_background"></div>
-          <div id="game_sprites">
-            <div id="container" class="pos falling">
-              <div id="sprite" class="spin"></div>
+    <section id="screen">
+      <div id="game">
+        <div id="game_background">
+          <img src="graphics/game-background.svg" alt="" />
+        </div>
+        <div id="game_sprites">
+          <div id="cheese_container" class="pos falling">
+            <div id="cheese_sprite" class="spin">
+              <img src="graphics/item-good_cheese.svg" alt="" />
             </div>
           </div>
-          <div id="game_foreground"></div>
-          <div id="game_ui">
-            <div id="game_point"></div>
-            <div id="game_life"></div>
-            <div id="game_time"></div>
-          </div>
         </div>
-        <div id="title_screen"></div>
-        <div id="instructions"></div>
-        <div id="game_lost_screen"></div>
-        <div id="game_won_screen"></div>
-      </section>
-    </main>
+        <div id="game_foreground"></div>
+        <div id="game_ui">
+          <div id="game_point"></div>
+          <div id="game_life"></div>
+          <div id="game_time"></div>
+        </div>
+      </div>
+      <div id="title_screen">
+        <h1>game title</h1>
+        <p></p>
+      </div>
+      <div id="instructions"></div>
+      <div id="game_lost_screen"></div>
+      <div id="game_won_screen"></div>
+    </section>
+    <script src="js/test.js"></script>
   </body>
 </html>
