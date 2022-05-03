@@ -6,36 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fat Rat Game</title>
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/animations.css" />
+    <!-- <link rel="stylesheet" href="css/animations.css" /> -->
   </head>
+
   <body>
     <section id="screen">
       <div id="game">
-        <div id="game_background">
-          <img src="graphics/game-background.svg" alt="" />
-        </div>
+        <div id="game_background"></div>
+
         <div id="game_sprites">
-          <div id="cheese_container" class="pos falling">
-            <div id="cheese_sprite" class="spin">
-              <img src="graphics/item-good_cheese.svg" alt="" />
-            </div>
+          <div id="cheese_container">
+            <div id="cheese_sprite"></div>
+          </div>
+
+          <div id="egg_container">
+            <div id="eeg_sprite"></div>
+          </div>
+
+          <div id="popcorn_container">
+            <div id="popcorn_sprite"></div>
+          </div>
+
+          <div id="bluecheese_container">
+            <div id="bluecheese_sprite"></div>
+          </div>
+
+          <div id="candy_container">
+            <div id="candy_sprite"></div>
+          </div>
+
+          <div id="coffee_container">
+            <div id="coffee_sprite"></div>
           </div>
         </div>
+
+        <div id="game_middleground">
+          <div id="eggtimer"></div>
+        </div>
+
         <div id="game_foreground"></div>
+
         <div id="game_ui">
-          <div id="game_point"></div>
+          <!-- my own -->
+
+          <!-- <div id="game_point"></div>
           <div id="game_life"></div>
-          <div id="game_time"></div>
+          <div id="game_time"></div> -->
+
+          <!-- From Kelds game -->
+          <div id="score_board">
+            Score: <br /><span id="current_score"></span>
+          </div>
+
+          <div id="life_board">
+            Lives: <br /><span id="current_lives"></span>
+          </div>
+
+          <div id="time_board">Time: <span id="time_left"></span></div>
         </div>
       </div>
-      <div id="title_screen">
+
+      <div id="title_screen" class="hidden">
         <h1>game title</h1>
-        <p></p>
+        <p id="button_instructions">instructions</p>
+        <p id="button_startgame">start game</p>
       </div>
-      <div id="instructions"></div>
-      <div id="game_lost_screen"></div>
-      <div id="game_won_screen"></div>
+
+      <div id="instructions_screen" class="hidden">
+        <h1>instruction title</h1>
+        <p id="button_title">Back to Main</p>
+      </div>
+
+      <div id="lose_screen" class="hidden">
+        <h1>Oh no, your rat died!</h1>
+        <p id="button_lose_title">back to main</p>
+      </div>
+
+      <div id="win_screen" class="hidden">
+        <h1>A fat rat is a happy rat</h1>
+        <p id="button_win_title">back to main</p>
+      </div>
     </section>
+
     <script src="js/test.js"></script>
   </body>
 </html>
