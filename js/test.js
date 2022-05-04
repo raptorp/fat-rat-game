@@ -90,53 +90,48 @@ function startGame() {
     document.querySelector("#candy_container").addEventListener("click", badItemHit);
     document.querySelector("#coffee_container").addEventListener("click", badItemHit);
     // --> bad item completes iteration
-    document.querySelector("#tablet1_container").addEventListener("animationiteration", sqeezeBadItem);
+    document.querySelector("#bluecheese_container").addEventListener("animationiteration", sqeezeBadItem);
+    document.querySelector("#candy_container").addEventListener("animationiteration", sqeezeBadItem);
+    document.querySelector("#coffee_container").addEventListener("animationiteration", sqeezeBadItem);
 }
 
 function goodItemHit() {
     console.log(`goodItemHit`);
-    // "this" holds the element that triggered the eventListener 
-    //console.log(this);
     // stop falling
     this.classList.add("stop");
-
-    // rotate apple
+    // rotate item
     this.firstElementChild.classList.add("rotate");
-    // 1 point
+    // +1 point
     points = points + 1;
     console.log(`Points: ${points}`);
     document.querySelector("#current_score").textContent = points;
     
-    // --> restarts apple when rotation completes 
-    this.firstElementChild.addEventListener("animationend", restartApple);
+    // --> restarts item when rotation completes 
+    this.firstElementChild.addEventListener("animationend", restartGoodItem);
 }
 
 function sqeezeGoodItem() {
     console.log(`sqeezeGoodItem`);
-    // "this" holds the element that triggered the eventListener 
-    //console.log(this);
     // removes all classes from the container
     this.classList.value = "";
     // removes all classes from the sprite
     this.firstElementChild.classList.value = "";
     // removes the animationend eventlistener from the sprite
-    this.firstElementChild.removeEventListener("animationend", restartApple);
+    this.firstElementChild.removeEventListener("animationend", restartGoodItem);
     // jumps a javascript frame 
     this.offsetHeight;
 
     let randomPosition = generateRandomNumber(8);
     this.classList.add("falling1", "pos" + randomPosition);
 }
-function restartApple() {
-    console.log(`restartApple`);
-    // "this" holds the element that triggered the eventListener 
-    //console.log(this);
+function restartGoodItem() {
+    console.log(`restartGoodItem`);
     // removes all classes from the container
     this.parentElement.classList.value = "";
     // removes all classes from the sprite
     this.classList.value = "";
     // removes the animationend eventlistener from the sprite
-    this.removeEventListener("animationend", restartApple);
+    this.removeEventListener("animationend", restartGoodItem);
     // jumps a javascript frame 
     this.parentElement.offsetHeight;
 
@@ -146,10 +141,11 @@ function restartApple() {
 
 function badItemHit() {
     console.log(`badItemHit`);
+    
     // stop falling
-    //this.classList.add("stop");
+    // this.classList.add("stop");
 
-    // rotate tablet
+    // rotate bad item
     this.firstElementChild.classList.add("rotate");
 
     //lives
@@ -160,16 +156,15 @@ function badItemHit() {
         gameOver();
     }
 
-    // --> restarts tablet when rotation completes 
-    this.firstElementChild.addEventListener("animationend", restartTablet);
+    // --> restarts bad item when rotation completes 
+    this.firstElementChild.addEventListener("animationend", restartBadItem);
 }
 
 function sqeezeBadItem() {
-    console.log(`restartTablet`);
-    //console.log(this);
+    console.log(`restartBadItem`);
     this.classList.value = "";
     this.firstElementChild.classList.value = "";
-    this.firstElementChild.removeEventListener("animationend", restartTablet)
+    this.firstElementChild.removeEventListener("animationend", restartBadItem)
 
     this.offsetHeight;
 
@@ -178,12 +173,11 @@ function sqeezeBadItem() {
     this.classList.add("falling" + randomFalling, "pos" + randomPosition);
 }
 
-function restartTablet() {
-    console.log(`restartTablet`);
-    //console.log(this);
+function restartBadItem() {
+    console.log(`restartBadItem`);
     this.parentElement.classList.value = "";
     this.classList.value = "";
-    this.removeEventListener("animationend", restartTablet)
+    this.removeEventListener("animationend", restartBadItem)
 
     this.offsetHeight;
 
@@ -221,7 +215,9 @@ function gameOver() {
     document.querySelector("#cheese_container").classList.value="";
     document.querySelector("#egg_container").classList.value="";
     document.querySelector("#popcorn_container").classList.value="";
-    document.querySelector("#tablet1_container").classList.value="";
+    document.querySelector("#bluecheese_container").classList.value="";
+    document.querySelector("#candy_container").classList.value="";
+    document.querySelector("#coffee_container").classList.value="";
 
     document.querySelector("#cheese_container").removeEventListener("click", goodItemHit);
     document.querySelector("#egg_container").removeEventListener("click", goodItemHit);
