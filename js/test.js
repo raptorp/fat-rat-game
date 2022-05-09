@@ -9,7 +9,7 @@ window.addEventListener("load", start);
 function start() {
   lives = 3;
   points = 0;
-  gameDuration = 8000;
+  gameDuration = 2000;
   maxPoints = 9;
   ratGetsFatter(points);
   for (let i = 1; i <= lives; i++) {
@@ -44,6 +44,7 @@ function showInstructions() {
 
 // ------------------------- AUDIO ------------------------
 
+let gameSoundtrack = new Audio("../sound/soundtrack.mp3");
 let goodSound = new Audio("../sound/crunch.mp3");
 let badSound = new Audio("../sound/gag.mp3");
 let gameWonSound = new Audio("../sound/cheer.mp3");
@@ -52,7 +53,9 @@ let gameLostSound = new Audio("../sound/boo.mp3");
 // ------------------------- GAME STARTING ------------------------
 function startGame() {
   hideAllScreens();
-
+  gameSoundtrack.currentTime = 0;
+  gameSoundtrack.play();
+  gameSoundtrack.loop = true;
   // good elements
   document.querySelector("#cheese_container").classList.add("falling1", "pos1");
   document.querySelector("#egg_container").classList.add("falling3", "pos7");
@@ -138,6 +141,7 @@ function ratGetsFatter(points) {
 // --------------------- GOOD ELEMENTS & POINTS ---------------------
 function goodItemHit() {
   this.removeEventListener("click", goodItemHit);
+  goodSound.currentTime = 0;
   goodSound.play();
   this.classList.add("stop");
   this.firstElementChild.classList.add("rotate");
@@ -179,6 +183,7 @@ function heartUpdate(life) {
 
 function badItemHit() {
   this.removeEventListener("click", badItemHit);
+  badSound.currentTime = 0;
   badSound.play();
   this.classList.add("stop");
   this.firstElementChild.classList.add("rotate");
@@ -299,6 +304,7 @@ function gameOver() {
 
 function winning() {
   document.querySelector("#win_screen").classList.remove("hidden");
+  gameWonSound.play(0);
   let buttonWinTitle = document.querySelector("#button_win_title");
   buttonWinTitle.disabled = true;
   setTimeout(() => {
@@ -309,6 +315,7 @@ function winning() {
 
 function losing() {
   document.querySelector("#lose_screen").classList.remove("hidden");
+  gameLostSound.play(0);
   let buttonLostTitle = document.querySelector("#button_lost_title");
   buttonLostTitle.disabled = true;
   setTimeout(() => {
