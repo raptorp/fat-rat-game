@@ -42,6 +42,13 @@ function showInstructions() {
   document.querySelector("#button_title").addEventListener("click", showTitle);
 }
 
+// ------------------------- AUDIO ------------------------
+
+let goodSound = new Audio("../sound/crunch.mp3");
+let badSound = new Audio("../sound/gag.mp3");
+let gameWonSound = new Audio("../sound/cheer.mp3");
+let gameLostSound = new Audio("../sound/boo.mp3");
+
 // ------------------------- GAME STARTING ------------------------
 function startGame() {
   hideAllScreens();
@@ -131,6 +138,7 @@ function ratGetsFatter(points) {
 // --------------------- GOOD ELEMENTS & POINTS ---------------------
 function goodItemHit() {
   this.removeEventListener("click", goodItemHit);
+  goodSound.play();
   this.classList.add("stop");
   this.firstElementChild.classList.add("rotate");
   points = points + 1;
@@ -171,6 +179,7 @@ function heartUpdate(life) {
 
 function badItemHit() {
   this.removeEventListener("click", badItemHit);
+  badSound.play();
   this.classList.add("stop");
   this.firstElementChild.classList.add("rotate");
   lives = lives - 1;
