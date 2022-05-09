@@ -1,326 +1,308 @@
+/* --------------------- TYPOGRAPHY --------------------- */
+
+@font-face {
+  font-family: "digital-mono";
+  src: url("../fonts/digital-mono.ttf");
+}
+
 body {
-    margin: 0 0 0 0;
+  margin: 0 0 0 0;
 }
 
 section {
-    margin: 0 0 0 0;
+  margin: 0 0 0 0;
 }
 
 #screen {
-    position: relative;
-    width: 99%;
-    aspect-ratio: 16/9;
-    border: 2px solid black;
-    overflow: hidden;
+  position: relative;
+  width: 99%;
+  aspect-ratio: 16/9;
+  border: 2px solid black;
+  overflow: hidden;
 }
 
-
-/* From Kelds game */
-#title_screen, #instructions_screen, #lose_screen, #win_screen {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: darkslategrey;
-    color: burlywood;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Tapestry',
-    cursive;
-    font-size: 5vw;
-    line-height: 1em;
+#title_screen,
+#instructions_screen,
+#lose_screen,
+#win_screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: darkslategrey;
+  color: burlywood;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Tapestry", cursive;
+  font-size: 5vw;
+  line-height: 1em;
 }
 
-/* From Kelds game */
-#title_screen>p,
-#instructions_screen>p,
-#win_screen>p,
-#lose_screen>p {
-    margin: 0;
-    padding: 2%;
-    border: 1px black solid;
-    border-radius: 5px;
-    box-shadow: 2px 1px #666;
-    cursor: pointer;
+#title_screen > button,
+#instructions_screen > button,
+#win_screen > button,
+#lose_screen > button {
+  margin: 0;
+  padding: 2%;
+  border: 1px black solid;
+  border-radius: 5px;
+  box-shadow: 2px 1px #666;
+  cursor: pointer;
 }
 
-/* From Kelds game */
-#title_screen>p:active,
-#instructions_screen>p:active,
-#win_screen>p:active,
-#lose_screen>p:active {
-    transform: translate(2px, 3px);
-    box-shadow: 0 0 #666;
-    cursor: pointer;
-
+#title_screen > button:active,
+#instructions_screen > button:active,
+#win_screen > button:active,
+#lose_screen > button:active {
+  transform: translate(2px, 3px);
+  box-shadow: 0 0 #666;
+  cursor: pointer;
 }
-
 
 #game {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
-/* From Kelds game */
 #game_background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url("../graphics/game-background.svg");
-    background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("../graphics/game-background.svg");
+  background-size: cover;
 }
 
-/* From Kelds game */
 #game_middleground {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-/* From Kelds game */
 #eggtimer {
-    position: absolute;
-    background-image: url("../graphics/timer-base.svg");
-    background-size: cover;
-    width: 6%;
-    aspect-ratio: 1/2.2;
-    top: 47.5%;
-    left: 80%;
+  position: absolute;
+  background-image: url("../graphics/timer-base.svg");
+  background-size: cover;
+  width: 16.5%;
+  aspect-ratio: 61/50;
+  top: 3%;
+  left: 1%;
 }
 
+/* --------------------- HEALTH --------------------- */
 
+.heart_full,
+.heart_empty {
+  background-size: cover;
+  height: 100%;
+  aspect-ratio: 167/150;
+}
+
+.heart_full {
+  background-image: url("../graphics/heart-full.svg");
+}
+
+.heart_empty {
+  background-image: url("../graphics/heart-empty.svg");
+}
 
 /* --------------------- GOOD ITEMS --------------------- */
 
-#cheese_container, #egg_container, #popcorn_container {
-    position: absolute;
-    width: 9%;
-    aspect-ratio: 1/1;
+#cheese_container,
+#egg_container,
+#popcorn_container {
+  position: absolute;
+  width: 9%;
+  aspect-ratio: 1/1;
 }
 
 #cheese_sprite {
-    background-image: url("../graphics/item-good_cheese.svg");
-    background-size: cover;
-    width: 100%;
-    height: 100%;
+  background-image: url("../graphics/item-good_cheese.svg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 
 #egg_sprite {
-    background-image: url("../graphics/item-good_eggs.svg");
-    background-size: cover;
-    width: 100%;
-    height: 100%;
+  background-image: url("../graphics/item-good_eggs.svg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 
 #popcorn_sprite {
-    background-image: url("../graphics/item-good_popcorn.svg");
-    background-size: cover;
-    width: 100%;
-    height: 100%;
+  background-image: url("../graphics/item-good_popcorn.svg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
-
-
 
 /* --------------------- BAD ITEMS --------------------- */
 
-#bluecheese_container, #candy_container, #coffee_container {
-    position: absolute;
-    width: 9%;
-    aspect-ratio: 1/1;
+#bluecheese_container,
+#candy_container,
+#coffee_container {
+  position: absolute;
+  width: 9%;
+  aspect-ratio: 1/1;
 }
 
 #bluecheese_sprite {
-    background-image: url("../graphics/item-bad_blue-cheese.svg");
-    background-size: cover;
-    width: 100%;
-    height: 100%;
+  background-image: url("../graphics/item-bad_blue-cheese.svg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 
 #candy_sprite {
-    background-image: url("../graphics/item-bad_candy.svg");
-    background-size: cover;
-    width: 100%;
-    height: 100%;
+  background-image: url("../graphics/item-bad_candy.svg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 
 #coffee_sprite {
-    background-image: url("../graphics/item-bad_coffee.svg");
-    background-size: cover;
-    width: 100%;
-    height: 100%;
+  background-image: url("../graphics/item-bad_coffee.svg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
-
 
 /* --------------------- FOREGROUND --------------------- */
 
-/* From Kelds game */
 #game_foreground {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-/* From Kelds game */
 #game_ui {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-/* From Kelds game */
-#score_board,
+#point_rat {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  background-size: cover;
+  height: 30%;
+  aspect-ratio: 89/150;
+  background-image: url("../graphics/point_0.svg");
+}
+
 #life_board {
-    position: absolute;
-    top: 5%;
-    width: 10%;
-    font-size: 4vw;
-    color: darkgreen;
-    font-family: 'Tapestry', cursive;
+  position: absolute;
+  top: 5%;
+  right: 4%;
+  text-align: right;
+  height: 8%;
+  width: 17%;
+  display: flex;
+  justify-content: space-between;
 }
 
-/* From Kelds game */
-#score_board {
-    left: 5%;
-}
-
-/* From Kelds game */
-#life_board {
-    right: 5%;
-    text-align: right;
-}
-
-/* From Kelds game */
 #time_board {
-    color: white;
-    position: absolute;
-    left: 80%;
-    bottom: 4%;
-    width: 15%;
-    background-color: black;
-    padding: 3px 3px 3px 6px;
-    border: 2px white solid;
-    font-size: 2.4vw;
+  font-family: "digital-mono";
+  color: rgb(9, 9, 9);
+  position: absolute;
+  right: 86%;
+  top: 8.5%;
+  font-size: 5vw;
 }
-
 
 /* --------------------- ANIMATION --------------------- */
 
-/* From Kelds game */
 .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
-/* From Kelds game */
 .pos1 {
-    left: 10%;
-    top: -20%;
+  left: 10%;
+  top: -20%;
 }
 
-/* From Kelds game */
 .pos2 {
-    left: 20%;
-    top: -20%;
+  left: 20%;
+  top: -20%;
 }
 
-/* From Kelds game */
 .pos3 {
-    left: 30%;
-    top: -20%;
+  left: 30%;
+  top: -20%;
 }
 
-/* From Kelds game */
 .pos4 {
-    left: 40%;
-    top: -20%;
+  left: 40%;
+  top: -20%;
 }
 
-/* From Kelds game */
 .pos5 {
-    left: 50%;
-    top: -20%;
+  left: 50%;
+  top: -20%;
 }
 
-/* From Kelds game */
 .pos6 {
-    left: 60%;
-    top: -20%;
+  left: 60%;
+  top: -20%;
 }
 
-/* From Kelds game */
 .pos7 {
-    left: 70%;
-    top: -20%;
+  left: 70%;
+  top: -20%;
 }
 
-/* From Kelds game */
 .pos8 {
-    left: 90%;
-    top: -20%;
+  left: 90%;
+  top: -20%;
 }
 
-/* From Kelds game */
 .falling1 {
-    animation-name: falling;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+  animation-name: falling;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
-/* From Kelds game */
 .falling2 {
-    animation-name: falling;
-    animation-duration: 2.5s;
-    animation-delay: 0.5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+  animation-name: falling;
+  animation-duration: 2.5s;
+  animation-delay: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
-/* From Kelds game */
 .falling3 {
-    animation-name: falling;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+  animation-name: falling;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
-/* From Kelds game */
 .rotate {
-    animation-name: rotate;
-    animation-duration: 0.5s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
+  animation-name: rotate;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
 }
 
-/* From Kelds game */
 .stop {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
 
-/* From Kelds game */
 @keyframes falling {
-    to {
-        transform: translateY(760%);
-    }
+  to {
+    transform: translateY(760%);
+  }
 }
 
-/* From Kelds game */
 @keyframes rotate {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
-/* From Kelds game */
-
-/* From Kelds game */
-
-/* From Kelds game */
-
-/* From Kelds game */
-
-/* From Kelds game */
