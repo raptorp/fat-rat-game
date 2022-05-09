@@ -1,257 +1,316 @@
-// alert("hello mellow yellow") ; //
-// console.log("hello mellow yellow") ;
-// function sayHello(){
-//     alert("hello") ;
-// }
-// document.querySelector("#cheese_sprite") .addEventListener("click", sayHello) ;
-
-// function item_clicked(){
-
-// }
-
-// Create global variables
+// ---------------------- GLOBAL VARIABLES ----------------------
 let lives;
 let points;
 let gameDuration;
 
-// When the window has loaded the page, the eventlistener 
-// "load" is triggered and calls the function "start"
 window.addEventListener("load", start);
 
+// ----------------------- INITIAL VALUES -----------------------
 function start() {
-    // Sets the initial values and calls the showTitle()
-    console.log('start');
-    lives = 10;
-    points = 0;
-    gameDuration = 60;
-    document.querySelector("#current_score").textContent = points;
-    document.querySelector("#current_lives").textContent = lives;
-    showTitle();
+  lives = 3;
+  points = 0;
+  gameDuration = 8000;
+  maxPoints = 9;
+  ratGetsFatter(points);
+  for (let i = 1; i <= lives; i++) {
+    document.querySelector(`#heart_${i}`).classList.remove("heart_empty");
+  }
+  showTitle();
 }
 
+// ------------------------- TITLE SCREEN ------------------------
 function showTitle() {
-    console.log('showTitle');
-    // Show title screen
-    hideAllScreens();
-    document.querySelector("#title_screen").classList.remove("hidden");
-    // 
-    // TODO Stop music
-    // TODO Sound control button
-    // TODO Play sound
-    //
-    // --> user clicks start button
-    document.querySelector("#button_startgame").addEventListener("click", startGame);
-    // --> user clicks instrunctions button
-    document.querySelector("#button_instructions").addEventListener("click", showInstructions);
+  hideAllScreens();
+  document.querySelector("#title_screen").classList.remove("hidden");
+  //
+  // TODO Stop music
+  // TODO Sound control button
+  // TODO Play sound
+  //
+  document
+    .querySelector("#button_startgame")
+    .addEventListener("click", startGame);
+  document
+    .querySelector("#button_instructions")
+    .addEventListener("click", showInstructions);
 }
 
+// --------------------- INSTRUCTIONS SCREEN ----------------------
 function showInstructions() {
-    console.log('showInstructions');
-    // Show instruction screen
-    hideAllScreens();
-    document.querySelector("#instructions_screen").classList.remove("hidden");
-    // Show start button
-    // Show title button
-    // Play sound
-    // --> user clicks title button
-    document.querySelector("#button_title").addEventListener("click", showTitle);
+  hideAllScreens();
+  document.querySelector("#instructions_screen").classList.remove("hidden");
+  document.querySelector("#button_title").addEventListener("click", showTitle);
 }
 
+// ------------------------- GAME STARTING ------------------------
 function startGame() {
-    console.log(`startGame`);
-    // Show game screen / UPDATE to more generic method
-    hideAllScreens();
+  hideAllScreens();
 
-    // good elements start falling
-    document.querySelector("#cheese_container").classList.add("falling1", "pos1");
-    document.querySelector("#egg_container").classList.add("falling3", "pos7");
-    document.querySelector("#popcorn_container").classList.add("falling3", "pos3");
+  // good elements
+  document.querySelector("#cheese_container").classList.add("falling1", "pos1");
+  document.querySelector("#egg_container").classList.add("falling3", "pos7");
+  document
+    .querySelector("#popcorn_container")
+    .classList.add("falling3", "pos3");
 
-    // bad elements start falling
-    document.querySelector("#bluecheese_container").classList.add("falling2", "pos4");
-    document.querySelector("#candy_container").classList.add("falling2", "pos2");
-    document.querySelector("#coffee_container").classList.add("falling2", "pos6");
+  // bad elements
+  document
+    .querySelector("#bluecheese_container")
+    .classList.add("falling2", "pos4");
+  document.querySelector("#candy_container").classList.add("falling2", "pos2");
+  document.querySelector("#coffee_container").classList.add("falling2", "pos6");
 
+  // timer
+  showTimer();
 
-    // start timer
-    showTimer();
+  // ------------------- INTERACTION: GOOD ITEM -------------------
+  document
+    .querySelector("#cheese_container")
+    .addEventListener("click", goodItemHit);
+  document
+    .querySelector("#egg_container")
+    .addEventListener("click", goodItemHit);
+  document
+    .querySelector("#popcorn_container")
+    .addEventListener("click", goodItemHit);
 
-    // --> User clicks good item
-    document.querySelector("#cheese_container").addEventListener("click", goodItemHit);
-    document.querySelector("#egg_container").addEventListener("click", goodItemHit);
-    document.querySelector("#popcorn_container").addEventListener("click", goodItemHit);
-    // --> good item completes iteration
-    document.querySelector("#cheese_container").addEventListener("animationiteration", sqeezeGoodItem);
-    document.querySelector("#egg_container").addEventListener("animationiteration", sqeezeGoodItem);
-    document.querySelector("#popcorn_container").addEventListener("animationiteration", sqeezeGoodItem);
+  document
+    .querySelector("#cheese_container")
+    .addEventListener("animationiteration", sqeezeGoodItem);
+  document
+    .querySelector("#egg_container")
+    .addEventListener("animationiteration", sqeezeGoodItem);
+  document
+    .querySelector("#popcorn_container")
+    .addEventListener("animationiteration", sqeezeGoodItem);
 
-    // --> User bad item
-    document.querySelector("#bluecheese_container").addEventListener("click", badItemHit);
-    document.querySelector("#candy_container").addEventListener("click", badItemHit);
-    document.querySelector("#coffee_container").addEventListener("click", badItemHit);
-    // --> bad item completes iteration
-    document.querySelector("#bluecheese_container").addEventListener("animationiteration", sqeezeBadItem);
-    document.querySelector("#candy_container").addEventListener("animationiteration", sqeezeBadItem);
-    document.querySelector("#coffee_container").addEventListener("animationiteration", sqeezeBadItem);
+  // -------------------- INTERACTION: BAD ITEM --------------------
+  document
+    .querySelector("#bluecheese_container")
+    .addEventListener("click", badItemHit);
+  document
+    .querySelector("#candy_container")
+    .addEventListener("click", badItemHit);
+  document
+    .querySelector("#coffee_container")
+    .addEventListener("click", badItemHit);
+
+  document
+    .querySelector("#bluecheese_container")
+    .addEventListener("animationiteration", sqeezeBadItem);
+  document
+    .querySelector("#candy_container")
+    .addEventListener("animationiteration", sqeezeBadItem);
+  document
+    .querySelector("#coffee_container")
+    .addEventListener("animationiteration", sqeezeBadItem);
 }
 
+// --------------------------- POINT RAT ---------------------------
+function ratGetsFatter(points) {
+  let pointRat = document.querySelector("#point_rat");
+  pointRat.style.backgroundImage = `url("../graphics/point_${points}.svg")`;
+  if (points <= 5) {
+    pointRat.style.aspectRatio = 89 / 150;
+    pointRat.style.right = "5%";
+  } else if (points == 6) {
+    pointRat.style.aspectRatio = 46 / 75;
+    pointRat.style.right = "5%";
+  } else if (points == 7) {
+    pointRat.style.aspectRatio = 31 / 50;
+    pointRat.style.right = "5%";
+  } else if (points == 8) {
+    pointRat.style.aspectRatio = 7 / 10;
+    pointRat.style.right = "4.5%";
+  } else if (points == 9) {
+    pointRat.style.aspectRatio = 4 / 5;
+    pointRat.style.right = "3.5%";
+  }
+}
+
+// --------------------- GOOD ELEMENTS & POINTS ---------------------
 function goodItemHit() {
-    console.log(`goodItemHit`);
-    // stop falling
-    this.classList.add("stop");
-    // rotate item
-    this.firstElementChild.classList.add("rotate");
-    // +1 point
-    points = points + 1;
-    console.log(`Points: ${points}`);
-    document.querySelector("#current_score").textContent = points;
-    
-    // --> restarts item when rotation completes 
-    this.firstElementChild.addEventListener("animationend", restartGoodItem);
+  this.removeEventListener("click", goodItemHit);
+  this.classList.add("stop");
+  this.firstElementChild.classList.add("rotate");
+  points = points + 1;
+  console.log(`Points: ${points}`);
+  ratGetsFatter(points);
+  if (points == maxPoints) {
+    gameOver();
+  }
+  this.firstElementChild.addEventListener("animationend", restartGoodItem);
 }
 
 function sqeezeGoodItem() {
-    console.log(`sqeezeGoodItem`);
-    // removes all classes from the container
-    this.classList.value = "";
-    // removes all classes from the sprite
-    this.firstElementChild.classList.value = "";
-    // removes the animationend eventlistener from the sprite
-    this.firstElementChild.removeEventListener("animationend", restartGoodItem);
-    // jumps a javascript frame 
-    this.offsetHeight;
-
-    let randomPosition = generateRandomNumber(8);
-    this.classList.add("falling1", "pos" + randomPosition);
+  this.classList.value = "";
+  this.firstElementChild.classList.value = "";
+  this.firstElementChild.removeEventListener("animationend", restartGoodItem);
+  this.offsetHeight;
+  let randomPosition = generateRandomNumber(8);
+  this.classList.add("falling1", "pos" + randomPosition);
 }
-function restartGoodItem() {
-    console.log(`restartGoodItem`);
-    // removes all classes from the container
-    this.parentElement.classList.value = "";
-    // removes all classes from the sprite
-    this.classList.value = "";
-    // removes the animationend eventlistener from the sprite
-    this.removeEventListener("animationend", restartGoodItem);
-    // jumps a javascript frame 
-    this.parentElement.offsetHeight;
 
-    let randomPosition = generateRandomNumber(8);
-    this.parentElement.classList.add("falling1", "pos" + randomPosition);
+function restartGoodItem() {
+  console.log(`restartGoodItem`);
+  this.parentElement.classList.value = "";
+  this.classList.value = "";
+  this.removeEventListener("animationend", restartGoodItem);
+  this.parentElement.offsetHeight;
+
+  let randomPosition = generateRandomNumber(8);
+  this.parentElement.classList.add("falling1", "pos" + randomPosition);
+  this.parentElement.addEventListener("click", goodItemHit);
+}
+
+// --------------------- BAD ELEMENTS & HEALTH ----------------------
+function heartUpdate(life) {
+  console.log("heart_amount updated");
+  document.querySelector(`#heart_${life}`).classList.add("heart_empty");
 }
 
 function badItemHit() {
-    console.log(`badItemHit`);
-    
-    // stop falling
-    // this.classList.add("stop");
-
-    // rotate bad item
-    this.firstElementChild.classList.add("rotate");
-
-    //lives
-    lives = lives - 1;
-    console.log(`Lives: ${lives}`);
-    document.querySelector("#current_lives").textContent = lives;
-    if (lives < 1) {
-        gameOver();
-    }
-
-    // --> restarts bad item when rotation completes 
-    this.firstElementChild.addEventListener("animationend", restartBadItem);
+  this.removeEventListener("click", badItemHit);
+  this.classList.add("stop");
+  this.firstElementChild.classList.add("rotate");
+  lives = lives - 1;
+  heartUpdate(lives + 1);
+  if (lives < 1) {
+    gameOver();
+  }
+  this.firstElementChild.addEventListener("animationend", restartBadItem);
 }
 
 function sqeezeBadItem() {
-    console.log(`restartBadItem`);
-    this.classList.value = "";
-    this.firstElementChild.classList.value = "";
-    this.firstElementChild.removeEventListener("animationend", restartBadItem)
-
-    this.offsetHeight;
-
-    let randomFalling = generateRandomNumber(3);
-    let randomPosition = generateRandomNumber(8);
-    this.classList.add("falling" + randomFalling, "pos" + randomPosition);
+  this.classList.value = "";
+  this.firstElementChild.classList.value = "";
+  this.firstElementChild.removeEventListener("animationend", restartBadItem);
+  this.offsetHeight;
+  let randomFalling = generateRandomNumber(3);
+  let randomPosition = generateRandomNumber(8);
+  this.classList.add("falling" + randomFalling, "pos" + randomPosition);
 }
 
 function restartBadItem() {
-    console.log(`restartBadItem`);
-    this.parentElement.classList.value = "";
-    this.classList.value = "";
-    this.removeEventListener("animationend", restartBadItem)
-
-    this.offsetHeight;
-
-    let randomFalling = generateRandomNumber(3);
-    let randomPosition = generateRandomNumber(8);
-    this.parentElement.classList.add("falling" + randomFalling, "pos" + randomPosition);
+  this.parentElement.classList.value = "";
+  this.classList.value = "";
+  this.removeEventListener("animationend", restartBadItem);
+  this.offsetHeight;
+  let randomFalling = generateRandomNumber(3);
+  let randomPosition = generateRandomNumber(8);
+  this.parentElement.classList.add(
+    "falling" + randomFalling,
+    "pos" + randomPosition
+  );
+  this.parentElement.addEventListener("click", badItemHit);
 }
 
+// ----------------------- "RANDOM" POSITION -----------------------
 function generateRandomNumber(num) {
-    return Math.floor(Math.random() * num) + 1;
+  return Math.floor(Math.random() * num) + 1;
+}
+
+// ----------------------------- TIMER ------------------------------
+function fromSecondsToTimer(seconds) {
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
 }
 
 function showTimer() {
-    //console.log(`showTimer`);
-    gameDuration = gameDuration - 1;
-    // update the user interface
-    document.querySelector("#time_left").textContent = gameDuration;
-    // then call the countTime function
-    countTime();
+  gameDuration -= 1;
+  document.querySelector("#time_left").textContent =
+    fromSecondsToTimer(gameDuration);
+  countTime();
 }
 
 function countTime() {
-    //console.log(`countTime`);
-    if (gameDuration > 0) {
-        // if there is still time left, wait a second and call the showTimer function again
-        setTimeout(showTimer, 1000);
-    } else {
-        gameOver();
-    }
+  if (gameDuration > 0) {
+    setTimeout(showTimer, 1000);
+  } else {
+    gameOver();
+  }
 }
 
+// ---------------------------- GAME OVER ----------------------------
 function gameOver() {
-    console.log('gameOver');
-    // remove all animations
-    document.querySelector("#cheese_container").classList.value="";
-    document.querySelector("#egg_container").classList.value="";
-    document.querySelector("#popcorn_container").classList.value="";
-    document.querySelector("#bluecheese_container").classList.value="";
-    document.querySelector("#candy_container").classList.value="";
-    document.querySelector("#coffee_container").classList.value="";
+  // reset timer
+  gameDuration = 0;
 
-    document.querySelector("#cheese_container").removeEventListener("click", goodItemHit);
-    document.querySelector("#egg_container").removeEventListener("click", goodItemHit);
-    document.querySelector("#popcorn_container").removeEventListener("click", goodItemHit);
-    document.querySelector("#tablet1_container").removeEventListener("click", badItemHit);
+  document.querySelector("#cheese_container").classList.value = "";
+  document.querySelector("#egg_container").classList.value = "";
+  document.querySelector("#popcorn_container").classList.value = "";
+  document.querySelector("#bluecheese_container").classList.value = "";
+  document.querySelector("#candy_container").classList.value = "";
+  document.querySelector("#coffee_container").classList.value = "";
 
-    document.querySelector("#cheese_container").removeEventListener("animationiteration", sqeezeGoodItem);
-    document.querySelector("#egg_container").removeEventListener("animationiteration", sqeezeGoodItem);
-    document.querySelector("#popcorn_container").removeEventListener("animationiteration", sqeezeGoodItem);
-    document.querySelector("#tablet1_container").removeEventListener("animationiteration", sqeezeBadItem);
+  document
+    .querySelector("#cheese_container")
+    .removeEventListener("click", goodItemHit);
+  document
+    .querySelector("#egg_container")
+    .removeEventListener("click", goodItemHit);
+  document
+    .querySelector("#popcorn_container")
+    .removeEventListener("click", goodItemHit);
+  document
+    .querySelector("#bluecheese_container")
+    .removeEventListener("click", badItemHit);
+  document
+    .querySelector("#candy_container")
+    .removeEventListener("click", badItemHit);
+  document
+    .querySelector("#coffee_container")
+    .removeEventListener("click", badItemHit);
 
-    // win or lose
-    if(points > 0 && lives > 0) {
-        winning();
-    } else {
-        losing();
-    }
+  document
+    .querySelector("#cheese_container")
+    .removeEventListener("animationiteration", sqeezeGoodItem);
+  document
+    .querySelector("#egg_container")
+    .removeEventListener("animationiteration", sqeezeGoodItem);
+  document
+    .querySelector("#popcorn_container")
+    .removeEventListener("animationiteration", sqeezeGoodItem);
+  document
+    .querySelector("#bluecheese_container")
+    .removeEventListener("animationiteration", sqeezeBadItem);
+  document
+    .querySelector("#candy_container")
+    .removeEventListener("animationiteration", sqeezeBadItem);
+  document
+    .querySelector("#coffee_container")
+    .removeEventListener("animationiteration", sqeezeBadItem);
+
+  // ------------------------ WIN/LOSE CONDITIONS ------------------------
+  if (points > 0 && lives > 0) {
+    winning();
+  } else {
+    losing();
+  }
 }
 
 function winning() {
-    console.log(`winning`);
-    document.querySelector("#win_screen").classList.remove("hidden");
-    document.querySelector("#win_playgame").addEventListener("click", start);
+  document.querySelector("#win_screen").classList.remove("hidden");
+  let buttonWinTitle = document.querySelector("#button_win_title");
+  buttonWinTitle.disabled = true;
+  setTimeout(() => {
+    buttonWinTitle.addEventListener("click", start);
+    buttonWinTitle.disabled = false;
+  }, 1000);
 }
 
 function losing() {
-    console.log(`losing`);
-    document.querySelector("#lose_screen").classList.remove("hidden");
-    document.querySelector("#lose_playgame").addEventListener("click", start);
+  document.querySelector("#lose_screen").classList.remove("hidden");
+  let buttonLostTitle = document.querySelector("#button_lost_title");
+  buttonLostTitle.disabled = true;
+  setTimeout(() => {
+    buttonLostTitle.addEventListener("click", start);
+    buttonLostTitle.disabled = false;
+  }, 1000);
 }
 
 function hideAllScreens() {
-    document.querySelector("#title_screen").classList.add("hidden");
-    document.querySelector("#instructions_screen").classList.add("hidden");
-    document.querySelector("#win_screen").classList.add("hidden");
-    document.querySelector("#lose_screen").classList.add("hidden");
+  document.querySelector("#title_screen").classList.add("hidden");
+  document.querySelector("#instructions_screen").classList.add("hidden");
+  document.querySelector("#win_screen").classList.add("hidden");
+  document.querySelector("#lose_screen").classList.add("hidden");
 }
