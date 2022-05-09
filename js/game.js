@@ -9,7 +9,7 @@ window.addEventListener("load", start);
 function start() {
   lives = 3;
   points = 0;
-  gameDuration = 20;
+  gameDuration = 2000;
   maxPoints = 9;
   ratGetsFatter(points);
   for (let i = 1; i <= lives; i++) {
@@ -298,6 +298,8 @@ function gameOver() {
 }
 
 function winning() {
+  gameSoundtrack.loop = false;
+  gameSoundtrack.pause();
   document.querySelector("#win_screen").classList.remove("hidden");
   gameWonSound.play(0);
   let buttonWinTitle = document.querySelector("#button_win_title");
@@ -309,6 +311,8 @@ function winning() {
 }
 
 function losing() {
+  gameSoundtrack.loop = false;
+  gameSoundtrack.pause();
   document.querySelector("#lose_screen").classList.remove("hidden");
   gameLostSound.play(0);
   let buttonLostTitle = document.querySelector("#button_lost_title");
