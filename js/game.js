@@ -9,7 +9,7 @@ window.addEventListener("load", start);
 function start() {
   lives = 3;
   points = 0;
-  gameDuration = 2000;
+  gameDuration = 20;
   maxPoints = 9;
   ratGetsFatter(points);
   for (let i = 1; i <= lives; i++) {
@@ -22,11 +22,6 @@ function start() {
 function showTitle() {
   hideAllScreens();
   document.querySelector("#title_screen").classList.remove("hidden");
-  //
-  // TODO Stop music
-  // TODO Sound control button
-  // TODO Play sound
-  //
   document
     .querySelector("#button_startgame")
     .addEventListener("click", startGame);
