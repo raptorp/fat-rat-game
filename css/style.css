@@ -9,6 +9,17 @@ h1 {
   margin: 0;
   font-family: digital-mono;
   white-space: pre-wrap;
+  font-weight: 100;
+  padding: 0px;
+  margin: 0px;
+}
+
+p {
+  margin: 0;
+  font-family: digital-mono;
+  white-space: normal;
+  padding: 0px;
+  margin: 0px;
 }
 
 /* --------------------- SCREENS --------------------- */
@@ -50,18 +61,38 @@ section {
   text-align: center;
 }
 
+#display_title > p {
+  font-size: 4vw;
+  text-align: center;
+}
+
 #display_instructions > h1 {
   font-size: 6vw;
   text-align: center;
 }
 
+#display_instructions > p {
+  font-size: 1.6vw;
+  text-align: center;
+}
+
 #display_lost > h1 {
-  font-size: 5vw;
+  font-size: 8vw;
+  text-align: center;
+}
+
+#display_lost > p {
+  font-size: 2.2vw;
   text-align: center;
 }
 
 #display_won > h1 {
-  font-size: 5vw;
+  font-size: 5.4vw;
+  text-align: center;
+}
+
+#display_won > p {
+  font-size: 2.2vw;
   text-align: center;
 }
 
@@ -83,6 +114,10 @@ section {
   margin-inline: 14%;
   /* margin-top: 13%; */
   height: 14vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ---------------------- BUTTONS ---------------------- */
@@ -95,26 +130,38 @@ p {
 }
 
 #button_instructions {
-  height: 6vw;
-  aspect-ratio: 60/29;
   background-image: url(../graphics/button_instructions.svg);
-  background-size: cover;
+}
+#button_startgame {
+  background-image: url(../graphics/button_start.svg);
+}
+#button_title {
+  background-image: url(../graphics/button_return.svg);
+}
+#button_lost_title {
+  background-image: url(../graphics/button_return.svg);
+}
+#button_win_title {
+  background-image: url(../graphics/button_return.svg);
 }
 
-#button_startgame {
+#button_instructions,
+#button_startgame,
+#button_title,
+#button_lost_title,
+#button_win_title {
   height: 6vw;
   aspect-ratio: 60/29;
-  background-image: url(../graphics/button_start.svg);
   background-size: cover;
 }
 
-#button_ #title_buttons,
-#instruction_buttons {
+#title_buttons,
+#instruction_buttons,
+#lose__buttons,
+#win__buttons {
   display: flex;
   justify-content: space-evenly;
-}
-
-#button_instructions {
+  margin-top: 3vw;
 }
 
 #title_screen > p:active,
@@ -157,6 +204,29 @@ p {
   top: 3%;
   left: 1%;
 }
+
+#button_pause {
+  background-image: url(../graphics/button_pause.svg);
+  height: 100%;
+  aspect-ratio: 60/29;
+  background-size: cover;
+}
+
+#button_sound {
+  background-image: url(../graphics/button_sound-off.svg);
+  height: 100%;
+  aspect-ratio: 14/15;
+  background-size: cover;
+}
+#ingame_buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 8.5vw;
+  height: 3.5vw;
+}
+display: flex;
+justify-content: space-evenly;
+margin-top: 3vw;
 
 /* --------------------- HEALTH --------------------- */
 

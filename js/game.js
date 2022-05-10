@@ -51,6 +51,7 @@ function startGame() {
   gameSoundtrack.currentTime = 0;
   gameSoundtrack.play();
   gameSoundtrack.loop = true;
+
   // good elements
   document.querySelector("#cheese_container").classList.add("falling1", "pos1");
   document.querySelector("#egg_container").classList.add("falling3", "pos7");
