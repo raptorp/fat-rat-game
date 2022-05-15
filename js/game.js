@@ -9,7 +9,7 @@ window.addEventListener("load", start);
 function start() {
   lives = 3;
   points = 0;
-  gameDuration = 2000;
+  gameDuration = 120;
   maxPoints = 9;
   ratGetsFatter(points);
   for (let i = 1; i <= lives; i++) {
