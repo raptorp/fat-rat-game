@@ -224,23 +224,17 @@ p {
   margin-top: 8.5vw;
   height: 3.5vw;
 }
-display: flex;
-justify-content: space-evenly;
-margin-top: 3vw;
 
 /* --------------------- HEALTH --------------------- */
-
 .heart_full,
 .heart_empty {
   background-size: cover;
   height: 100%;
   aspect-ratio: 167/150;
 }
-
 .heart_full {
   background-image: url("../graphics/heart-full.svg");
 }
-
 .heart_empty {
   background-image: url("../graphics/heart-empty.svg");
 }
