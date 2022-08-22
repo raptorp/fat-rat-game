@@ -39,11 +39,11 @@ function showInstructions() {
 
 // ------------------------- AUDIO ------------------------
 
-let gameSoundtrack = new Audio("../sound/soundtrack.mp3");
-let goodSound = new Audio("../sound/crunch.mp3");
-let badSound = new Audio("../sound/gag.mp3");
-let gameWonSound = new Audio("../sound/cheer.mp3");
-let gameLostSound = new Audio("../sound/boo.mp3");
+let gameSoundtrack = new Audio("sound/soundtrack.mp3");
+let goodSound = new Audio("sound/crunch.mp3");
+let badSound = new Audio("sound/gag.mp3");
+let gameWonSound = new Audio("sound/cheer.mp3");
+let gameLostSound = new Audio("sound/boo.mp3");
 
 // ------------------------- GAME STARTING ------------------------
 function startGame() {
@@ -115,7 +115,7 @@ function startGame() {
 // --------------------------- POINT RAT ---------------------------
 function ratGetsFatter(points) {
   let pointRat = document.querySelector("#point_rat");
-  pointRat.style.backgroundImage = `url("../graphics/point_${points}.svg")`;
+  pointRat.style.backgroundImage = `url("graphics/point_${points}.svg")`;
   if (points <= 5) {
     pointRat.style.aspectRatio = 89 / 150;
     pointRat.style.right = "5%";
